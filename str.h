@@ -17,14 +17,11 @@ class str
   public:
   
     // constructors of various forms
-    
     str();      
     str(char ch);
     str(const char* c_str);
 
-    str(const str &);
-
-    // lets not forget the destructor
+    str(const str &);   // copy constructor 
     ~str();
 
     // function for finding length of the string
@@ -40,8 +37,15 @@ class str
 
     // append extends the string by appending additional characters at the end of its current value:
     void append(const str& str);
+	
+	//void operator= (
+	
+	string operator+ (const str &) const;
 
   friend void swap(str &, str &);
+  
+  friend ostream & operator<<(ostream & out, const str &);
+  friend istream & operator>>(istream & in, str &);
 };
 
 #endif

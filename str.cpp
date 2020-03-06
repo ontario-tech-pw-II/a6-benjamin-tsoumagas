@@ -1,5 +1,3 @@
-// str.cpp
-
 #include "str.h"
 #include <cstring>
 
@@ -74,6 +72,43 @@ void str::append(const str & s)
   _n = _n + s._n;
 }
 
+str & str::operator=(const str &d){
+	if(_buf){
+		delete[]_buf;
+	}
+	_buf = new char[d._n];
+	_n = d._n;
+	
+	for(int i = 0; i<n; ++i){
+		_buf[i] = d._buf[i];
+	}
+	return *this;
+}
+
+str operator+(const str & s, const str &t){
+	str result = s;
+	result.append(t);
+	
+	return result;
+}
+
+ostream & operator<<(ostream &out, const str &s){
+	for(int i = 0; i < s._n; ++i){
+		out << s._buf[i];
+	}
+	return out;
+}
+
+istream & operator>>(istream &in, str &s){
+	char temp[2000];
+	
+	in >> temp;
+	
+	s = str(temp);
+	
+	return in;
+}
+
 void swap(str& x, str& y)
 {
   char *tmp;
@@ -88,5 +123,3 @@ void swap(str& x, str& y)
   y._n = ntmp;
   
 }
-
-
